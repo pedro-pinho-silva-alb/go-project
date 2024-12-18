@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: go_database
+    ports:
+      - "5432:5432"
+    networks:
+      - app_network
+
+  app:
+    build:
+      context: .
+    container_name: go-postgres-app
+    ports:
+      - "8085:8085"
+    environment:
+      DB_CONN: postgres://user:password@postgres:5432/go_database?sslmode=disable
+    depends_on:
+      - postgres
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
