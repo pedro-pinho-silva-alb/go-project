@@ -18,14 +18,12 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 
 WORKDIR /app
 
-# Copiar arquivos de dependências do Go
-COPY go.mod go.sum ./
+# Copiar o restante do código e construir o binário
+COPY code/. .
 
 # Instalar dependências do Go
 RUN go mod download
 
-# Copiar o restante do código e construir o binário
-COPY . .
 RUN go build -o main .
 
 # Preparar a imagem final

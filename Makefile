@@ -13,3 +13,7 @@ stop:
 
 rm:
 	docker rm $(shell docker ps -aq --filter ancestor=$(IMAGE_NAME))
+
+push:
+	docker tag go-postgres-app pedrosilva1/go-project
+	docker push pedrosilva1/go-project
