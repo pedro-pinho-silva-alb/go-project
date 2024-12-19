@@ -18,10 +18,10 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 
 WORKDIR /app
 
-# Copiar o restante do código e construir o binário
+# Copy code to the container
 COPY code/. .
 
-# Instalar dependências do Go
+# Install go dependecies
 RUN go mod download
 
 RUN go build -o main .
