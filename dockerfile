@@ -19,12 +19,12 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 WORKDIR /app
 
 # Copy code to the container
-COPY code/. .
+COPY project/. .
 
 # Install go dependecies
 RUN go mod download
 
-RUN go build -o main .
+RUN go build -o main ./code
 
 # Preparar a imagem final
 FROM debian:bullseye
